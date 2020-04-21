@@ -10,11 +10,18 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>&Tab;
+            <button type="reset">Remove</button></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+<form action="{% url 'polls:add_question' %}" method="POST">
+    {% csrf_token %}
+    <label>Your Question</label>
+    <input type="text" value="" name="question_text"/>
+    <input type="submit" value="Create" />
+</form>
 </body>
 </html>
