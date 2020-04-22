@@ -45,6 +45,10 @@ def add_question(request):
     return HttpResponseRedirect(reverse('polls:index'))
 
 
+def remove_question(request):
+    return HttpResponseRedirect(reverse('polls:index'))
+
+
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:

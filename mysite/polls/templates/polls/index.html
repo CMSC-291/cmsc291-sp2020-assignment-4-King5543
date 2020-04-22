@@ -11,7 +11,7 @@
     <ul>
     {% for question in latest_question_list %}
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>&Tab;
-            <button type="reset">Remove</button></li>
+            '<button type="submit" name="delete_button"> {% csrf_token %} Remove</button>'</li>
     {% endfor %}
     </ul>
 {% else %}
@@ -21,7 +21,7 @@
     {% csrf_token %}
     <label>Your Question</label>
     <input type="text" value="" name="question_text"/>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Create"/>
 </form>
 </body>
 </html>
