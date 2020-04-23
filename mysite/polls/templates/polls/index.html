@@ -10,8 +10,12 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>&Tab;
-            '<button type="submit" name="delete_button"> {% csrf_token %} Remove</button>'</li>
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+            <form action="{% url 'polls:remove_question' question.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" name="remove_question" value="Delete">
+            </form>
+&Tab;        </li>
     {% endfor %}
     </ul>
 {% else %}
@@ -19,9 +23,9 @@
 {% endif %}
 <form action="{% url 'polls:add_question' %}" method="POST">
     {% csrf_token %}
-    <label>Your Question</label>
+    <label>Add Question</label>
     <input type="text" value="" name="question_text"/>
-    <input type="submit" value="Create"/>
+    <input type="submit" value="Add"/>
 </form>
 </body>
 </html>
