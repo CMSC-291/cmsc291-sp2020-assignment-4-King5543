@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# Name: Austin King
+# E-mail: aking8@umbc.edu
+# Date: 4/23/2020
+# Description: Polling app that allows users to add and remove both questions and choices
 """Django's command-line utility for administrative tasks."""
 import os
 import sys

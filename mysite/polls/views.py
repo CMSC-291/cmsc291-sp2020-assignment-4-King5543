@@ -45,11 +45,10 @@ def add_question(request):
     return HttpResponseRedirect(reverse('polls:index'))
 
 
-def remove_question(question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    if request.method == 'POST':
-        question.delete()
-        return HttpResponseRedirect(reverse('polls:index'))
+def remove_question(request, question_id):
+    deleted_question = get_object_or_404(Question, pk=question_id)
+    deleted_question.delete()
+    return HttpResponseRedirect(reverse('polls:index'))
 
 
 def vote(request, question_id):
@@ -79,5 +78,8 @@ def add_choice(request, question_id):
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
-def remove_choice(request, question_id):
-    return HttpResponseRedirect(reverse('polls:detail'))
+def remove_choice(request, question_id, choice_id):
+    question = get_object_or_404(Question, pk=question_id)
+    selected_choice = question.choice_set.get(pk=choice_id)
+    selected_choice.delete()
+    return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
